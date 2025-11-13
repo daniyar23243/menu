@@ -109,16 +109,21 @@ body {
 }
 
 .lang-menu button {
-  padding: 8px 12px;
+  padding: 0 0;
   border: none;
-  background: #e6e6e6;
+  background: white;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.2s;
 }
 
-.lang-menu button:hover {
-  background: #d2d2d2;
+.lang-menu button:hover img{
+  width: 45px;
+}
+button img {
+  width: 40px;   
+  height: auto;  
+  transition: 0.3s;
 }
 
 @media (max-width: 600px) {
