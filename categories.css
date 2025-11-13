@@ -1,0 +1,138 @@
+.header {
+  width: 100%;
+  max-width: 900px;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 0 0 15px 15px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.back-btn,
+.lang-btn {
+  padding: 8px 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e6e6e6;
+  transition: 0.2s;
+}
+
+.back-btn:hover,
+.lang-btn:hover {
+  background: #d2d2d2;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  flex-grow: 1;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f3f3f3;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.categories-container {
+  margin-top: 20px;
+  width: 90%;
+  max-width: 750px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.category-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: 0.2s;
+  text-align: center;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.category-card p {
+  margin: 12px 0 15px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.lang-wrapper {
+  position: relative;
+}
+
+.lang-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  padding: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.lang-menu.show {
+  display: flex;
+}
+
+.lang-menu button {
+  padding: 8px 12px;
+  border: none;
+  background: #e6e6e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.lang-menu button:hover {
+  background: #d2d2d2;
+}
+
+@media (max-width: 600px) {
+  .categories-container {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .username {
+    flex-grow: 0;
+  }
+}

@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu App - Ввод имени</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+  <div class="container">
+    <input id="username" placeholder="Введите имя" />
+
+    <button class="btn-main" onclick="continueToCategories()">Продолжить</button>
+
+    <h3>Выбрать язык</h3>
+
+    <div class="lang-buttons">
+      <button onclick="setLanguage('ru')">Русский</button>
+      <button onclick="setLanguage('en')">English</button>
+      <button onclick="setLanguage('kg')">Кыргызча</button>
+    </div>
+  </div>
+
+  <script src="scr.js"></script>
 </body>
 </html>

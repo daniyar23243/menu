@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Категории меню</title>
+  <link rel="stylesheet" href="categories.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <button class="back-btn" onclick="goBack()">← Назад</button>
+
+    <div class="username" id="usernameText">Здравствуйте!</div>
+
+    <div class="lang-wrapper">
+      <button class="lang-btn" onclick="toggleLanguageMenu()">🌐 Язык</button>
+
+      <div class="lang-menu" id="langMenu">
+        <button onclick="setLanguage('ru')">Русский</button>
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('kg')">Кыргызча</button>
+      </div>
+    </div>
+  </header>
+
+  <h2 class="title">Выберите категорию</h2>
+
+  <div class="categories-container">
+
+    <div class="category-card" onclick="selectCategory('hot')">
+      <img src="images/hot.png" alt="Горячие напитки">
+      <p>Горячие напитки</p>
+    </div>
+
+    <div class="category-card" onclick="selectCategory('cold')">
+      <img src="images/cold.png" alt="Холодные напитки">
+      <p>Холодные напитки</p>
+    </div>
+
+    <div class="category-card" onclick="selectCategory('desserts')">
+      <img src="images/desserts.png" alt="Десерты">
+      <p>Десерты</p>
+    </div>
+
+    <div class="category-card" onclick="selectCategory('snacks')">
+      <img src="images/snacks.png" alt="Закуски">
+      <p>Закуски</p>
+    </div>
+
+  </div>
+
+
+  <script>
+    document.getElementById("usernameText").textContent =
+      "Здравствуйте, " + (localStorage.getItem("username") || "") + "!";
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    function selectCategory(category) {
+      localStorage.setItem("category", category);
+      window.location.href = "menu.html";
+    }
+
+    function toggleLanguageMenu() {
+      const menu = document.getElementById("langMenu");
+      menu.classList.toggle("show");
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem("language", lang);
+      alert("Язык изменён!");
+      document.getElementById("langMenu").classList.remove("show");
+    }
+  </script>
+
+</body>
+
+</html>
