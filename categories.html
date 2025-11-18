@@ -10,7 +10,7 @@
 <body>
 
   <header class="header">
-    <button class="back-btn" onclick="goBack()">← Назад</button>
+    <button class="back-btn" onclick="goBack()">←</button>
 
     <div class="username" id="usernameText">Здравствуйте!</div>
 
@@ -34,26 +34,6 @@
 
   <div class="categories-container">
 
-    <div class="category-card" onclick="selectCategory('hot')">
-      <img src="images/hot.png" alt="Горячие напитки">
-      <p>Горячие напитки</p>
-    </div>
-
-    <div class="category-card" onclick="selectCategory('cold')">
-      <img src="images/cold.png" alt="Холодные напитки">
-      <p>Холодные напитки</p>
-    </div>
-
-    <div class="category-card" onclick="selectCategory('desserts')">
-      <img src="images/desserts.png" alt="Десерты">
-      <p>Десерты</p>
-    </div>
-
-    <div class="category-card" onclick="selectCategory('snacks')">
-      <img src="images/snacks.png" alt="Закуски">
-      <p>Закуски</p>
-    </div>
-
   </div>
 
 
@@ -76,10 +56,81 @@
     }
 
     function setLanguage(lang) {
-      localStorage.setItem("language", lang);
-      alert("Язык изменён!");
-      document.getElementById("langMenu").classList.remove("show");
+  localStorage.setItem("language", lang);
+  toggleLanguageMenu(); // закрыть меню
+  updateUI(); // обновить текст на странице
+  loadCategories(); // обновить категории на выбранном языке
     }
+
+    // Загружаем категории из бэкенда
+function loadCategories() {
+  fetch("http://localhost:3000/categories")
+    .then(res => res.json())
+    .then(categories => {
+      const container = document.querySelector(".categories-container");
+      container.innerHTML = "";
+
+      const lang = localStorage.getItem("language") || "ru";
+
+      const nameField =
+        lang === "ru" ? "name_ru" :
+        lang === "en" ? "name_en" :
+        lang === "kg" ? "name_kg" : "name_ru";
+
+      categories.forEach(cat => {
+        const div = document.createElement("div");
+        div.classList.add("category-card");
+
+        div.innerHTML = `
+          <img src="${cat.image_url}" alt="">
+          <p>${cat[nameField]}</p>
+        `;
+
+        div.onclick = () => {
+          localStorage.setItem("category_id", cat.id);
+          window.location.href = "menu.html";
+        };
+
+        container.appendChild(div);
+      });
+    });
+}
+    const translations = {
+  ru: {
+    greeting: "Здравствуйте",
+    chooseCategory: "Выберите категорию",
+    language: "Язык",
+  },
+  en: {
+    greeting: "Hello",
+    chooseCategory: "Choose a category",
+    language: "Language",
+  },
+  kg: {
+    greeting: "Саламатсызбы",
+    chooseCategory: "Категорияны тандаңыз",
+    language: "Тил",
+  }
+};
+  function updateUI() {
+  const lang = localStorage.getItem("language") || "ru";
+
+  // Приветствие
+  const username = localStorage.getItem("username") || "";
+  document.getElementById("usernameText").textContent =
+    `${translations[lang].greeting}, ${username}!`;
+
+  // Заголовок
+  document.querySelector(".title").textContent =
+    translations[lang].chooseCategory;
+
+  // Кнопка выбора языка
+  document.querySelector(".lang-btn").textContent =
+    `🌐 ${translations[lang].language}`;
+}
+    updateUI();
+
+    loadCategories();
   </script>
 
 </body>
