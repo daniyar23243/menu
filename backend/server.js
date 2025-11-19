@@ -32,8 +32,8 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
     
     const initialItems = [
       // Холодные напитки (cat: 1)
-      [1, "Фраппе", "Frappe", "Фраппе", 200, "images/cold/frappe.png"],
-      [1, "Мохито", "Mojito", "Мохито", 220, "images/cold/mojito.png"],
+      [3, "Фраппе", "Frappe", "Фраппе", 200, "images/cold/frappe.png"],
+      [3, "Мохито", "Mojito", "Мохито", 220, "images/cold/mojito.png"],
 
       // Десерты (cat: 2)
       [2, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/desserts/cheesecake.png"],
