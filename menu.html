@@ -5,189 +5,286 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Меню</title>
   <link rel="stylesheet" href="menu.css">
+
   <style>
-  body {
-  margin: 0;
-  padding: 0;
-  background: #f3f3f3;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f3f3f3;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-/* ===== HEADER ===== */
+    /* ===== HEADER ===== */
 
-.header {
-  width: 100%;
-  max-width: 900px;
-  padding: 15px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  border-radius: 0 0 15px 15px;
-  margin-bottom: 20px;
-  position: relative;
-}
+    .header {
+      width: 100%;
+      max-width: 900px;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 0 0 15px 15px;
+      margin-bottom: 20px;
+      position: relative;
+    }
 
-.back-btn {
-  padding: 8px 14px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #e6e6e6;
-  transition: 0.2s;
-}
+    .back-btn {
+      padding: 8px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #e6e6e6;
+      transition: 0.2s;
+    }
 
-.back-btn:hover {
-  background: #d2d2d2;
-}
+    .back-btn:hover {
+      background: #d2d2d2;
+    }
 
-.title {
-  font-size: 22px;
-  font-weight: 700;
-  margin: 0 auto;
-  text-align: center;
-}
+    .title {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0 auto;
+    }
 
-/* ===== ITEMS ===== */
+    /* ===== LANGUAGE MENU ===== */
 
-.items-container {
-  width: 90%;
-  max-width: 750px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px;
-  padding-bottom: 30px;
-}
+    .lang-wrapper {
+      position: relative;
+    }
 
-.item-card {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  background: white;
-  padding: 12px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  transition: 0.2s;
-  cursor: pointer;
-}
+    .lang-btn {
+      padding: 8px 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #e6e6e6;
+      transition: 0.2s;
+    }
 
-.item-card:hover {
-  transform: scale(1.03);
-}
+    .lang-btn:hover {
+      background: #d2d2d2;
+    }
 
-.item-card img {
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+    .lang-menu {
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 10px;
+      padding: 10px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10;
+    }
 
-.item-info {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
+    .lang-menu.show {
+      display: flex;
+    }
 
-.item-name {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
+    .lang-menu button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
 
-.item-price {
-  margin-top: 5px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #444;
-}
+    .lang-menu img {
+      width: 40px;
+      transition: 0.2s;
+    }
 
-/* ===== MOBILE ===== */
+    .lang-menu img:hover {
+      width: 45px;
+    }
 
-@media (max-width: 600px) {
-  .header {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-  }
+    /* ===== ITEMS ===== */
 
-  .title {
-    font-size: 20px;
-  }
+    .items-container {
+      width: 90%;
+      max-width: 750px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      padding-bottom: 30px;
+    }
 
-  .item-card {
-    gap: 12px;
-    padding: 10px;
-  }
+    .item-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: white;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      cursor: pointer;
+      /* ❗ hover УБРАН */
+    }
 
-  .item-card img {
-    width: 75px;
-    height: 75px;
-  }
+    .item-card img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
 
-  .item-name {
-    font-size: 18px;
-  }
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-  .item-price {
-    font-size: 16px;
-  }
-}
+    .item-name {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
 
-</style>
+    .item-price {
+      margin-top: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    /* ===== MOBILE ===== */
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+
+      .item-card {
+        gap: 12px;
+        padding: 10px;
+      }
+
+      .item-card img {
+        width: 75px;
+        height: 75px;
+      }
+
+      .item-name {
+        font-size: 18px;
+      }
+
+      .item-price {
+        font-size: 16px;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
-  <header class="header">
-    <button class="back-btn" onclick="goBack()">←</button>
-    <h2 class="title" id="menuTitle"></h2>
-  </header>
 
-  <div class="items-container"></div>
+<header class="header">
+  <button class="back-btn" onclick="goBack()">←</button>
+  
+  <h2 class="title" id="menuTitle"></h2>
 
-  <script>
-    function goBack() {
-      window.location.href = "categories.html";
-    }
+  <div class="lang-wrapper">
+    <button class="lang-btn" onclick="toggleLanguageMenu()">🌐 Язык</button>
 
-    function loadItems() {
-      const categoryId = localStorage.getItem("category_id");
-      const lang = localStorage.getItem("language") || "ru";
-
-      const nameField =
-        lang === "ru" ? "name_ru" :
-        lang === "en" ? "name_en" :
-        lang === "kg" ? "name_kg" : "name_ru";
-
-      fetch(`http://localhost:3000/categories/${categoryId}/items`)
-        .then(res => res.json())
-        .then(items => {
-          const container = document.querySelector(".items-container");
-          container.innerHTML = "";
-
-          items.forEach(item => {
-            const div = document.createElement("div");
-            div.classList.add("item-card");
-
-            div.innerHTML = `
-  <img src="${item.image_url}">
-  <div class="item-info">
-    <p class="item-name">${item[nameField]}</p>
-    <p class="item-price">${item.price} сом</p>
+    <div class="lang-menu" id="langMenu">
+      <button onclick="setLanguage('ru')">
+        <img src="images/ru.png">
+      </button>
+      <button onclick="setLanguage('en')">
+        <img src="images/eng.jpg">
+      </button>
+      <button onclick="setLanguage('kg')">
+        <img src="images/kg.png">
+      </button>
+    </div>
   </div>
-`;
+</header>
 
-            container.appendChild(div);
-          });
-        });
-    }
+<div class="items-container"></div>
 
+<script>
+  // ===== ПЕРЕВОДЫ =====
+  const translations = {
+    ru: { menu: "Меню", currency: "сом", language: "Язык" },
+    en: { menu: "Menu", currency: "som", language: "Language" },
+    kg: { menu: "Меню", currency: "сом", language: "Тил" }
+  };
+
+  // ===== UPDATE UI =====
+  function updateUI() {
+    const lang = localStorage.getItem("language") || "ru";
+    document.getElementById("menuTitle").textContent = translations[lang].menu;
+    document.querySelector(".lang-btn").textContent = `🌐 ${translations[lang].language}`;
+  }
+
+  // ===== LANGUAGE DROPDOWN =====
+  function toggleLanguageMenu() {
+    document.getElementById("langMenu").classList.toggle("show");
+  }
+
+  function setLanguage(lang) {
+    localStorage.setItem("language", lang);
+    toggleLanguageMenu();
+    updateUI();
     loadItems();
-  </script>
+  }
+
+  // ===== LOAD ITEMS =====
+  function loadItems() {
+    const categoryId = localStorage.getItem("category_id");
+    const lang = localStorage.getItem("language") || "ru";
+
+    const nameField =
+      lang === "ru" ? "name_ru" :
+      lang === "en" ? "name_en" :
+      lang === "kg" ? "name_kg" : "name_ru";
+
+    fetch(`http://localhost:3000/categories/${categoryId}/items`)
+      .then(res => res.json())
+      .then(items => {
+        const container = document.querySelector(".items-container");
+        container.innerHTML = "";
+
+        items.forEach(item => {
+          const div = document.createElement("div");
+          div.classList.add("item-card");
+
+          div.innerHTML = `
+            <img src="${item.image_url}">
+            <div class="item-info">
+              <p class="item-name">${item[nameField]}</p>
+              <p class="item-price">${item.price} ${translations[lang].currency}</p>
+            </div>
+          `;
+
+          container.appendChild(div);
+        });
+      });
+  }
+
+  // ===== BACK =====
+  function goBack() {
+    window.location.href = "categories.html";
+  }
+
+  // ===== INIT =====
+  updateUI();
+  loadItems();
+</script>
 
 </body>
 </html>
