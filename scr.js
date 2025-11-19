@@ -1,10 +1,20 @@
-  function continueToCategories() {
-    const name = document.getElementById("username").value.trim();
-    if (name.length === 0) return;
+function continueToCategories() {
+  const name = document.getElementById("username").value.trim();
+  if (name.length === 0) return;
 
-    localStorage.setItem("username", name);
-    window.location.href = "categories.html";
+  // Кодовое слово для входа в админку
+  const ADMIN_CODE = "admin123";  
+
+  if (name === ADMIN_CODE) {
+    window.location.href = "admin.html";
+    return;
   }
+
+  // Обычный пользователь
+  localStorage.setItem("username", name);
+  window.location.href = "categories.html";
+}
+
 
   // ============ ПЕРЕВОД И ЯЗЫКИ ===============
 
