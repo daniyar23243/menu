@@ -8,7 +8,8 @@ db.serialize(() => {
       name_ru TEXT NOT NULL,
       name_en TEXT NOT NULL,
       name_kg TEXT NOT NULL,
-      image_url TEXT
+      image_url TEXT,
+      is_hidden INTEGER DEFAULT 0
     )
   `);
 
@@ -21,6 +22,7 @@ db.serialize(() => {
       name_kg TEXT NOT NULL,
       price REAL,
       image_url TEXT,
+      is_hidden INTEGER DEFAULT 0,
       FOREIGN KEY (category_id) REFERENCES categories(id)
     )
   `);

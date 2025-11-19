@@ -10,15 +10,15 @@ app.use(express.json());
 db.get("SELECT COUNT(*) AS count FROM categories", (err, result) => {
   if (!err && result.count === 0) {
     const initialCategories = [
-      ["Горячие напитки", "Hot drinks", "Ысык ичимдиктер", "images/hot.png"],
-      ["Холодные напитки", "Cold drinks", "Муздак ичимдиктер", "images/cold.png"],
-      ["Десерты", "Desserts", "Десерттер", "images/desserts.png"],
-      ["Закуски", "Snacks", "Закускалар", "images/snacks.png"]
+      [1, "Горячие напитки", "Hot drinks", "Ысык ичимдиктер", "images/hot.png"],
+      [2, "Холодные напитки", "Cold drinks", "Муздак ичимдиктер", "images/cold.png"],
+      [3, "Десерты", "Desserts", "Десерттер", "images/desserts.png"],
+      [4, "Закуски", "Snacks", "Закускалар", "images/snacks.png"]
     ];
 
     initialCategories.forEach(cat => {
       db.run(
-        `INSERT INTO categories (name_ru, name_en, name_kg, image_url) VALUES (?, ?, ?, ?)`,
+        `INSERT INTO categories (id, name_ru, name_en, name_kg, image_url) VALUES (?, ?, ?, ?, ?)`,
         cat
       );
     });
@@ -32,17 +32,17 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
     
     const initialItems = [
       // Холодные напитки (cat: 1)
-      [3, "Фраппе", "Frappe", "Фраппе", 200, "images/cold/frappe.png"],
-      [3, "Мохито", "Mojito", "Мохито", 220, "images/cold/mojito.png"],
+      [2, "Фраппе", "Frappe", "Фраппе", 200, "images/cold/frappe.png"],
+      [2, "Мохито", "Mojito", "Мохито", 220, "images/cold/mojito.png"],
 
       // Десерты (cat: 2)
-      [2, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/desserts/cheesecake.png"],
-      [2, "Эклер", "Eclair", "Эклер", 180, "images/desserts/eclair.png"],
+      [3, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/desserts/cheesecake.png"],
+      [3, "Эклер", "Eclair", "Эклер", 180, "images/desserts/eclair.png"],
 
       // Горячие напитки (cat: 3)
-      [3, "Американо", "Americano", "Американо", 150, "images/hot/americano.png"],
-      [3, "Капучино", "Cappuccino", "Капучино", 180, "images/hot/cappuccino.png"],
-      [3, "Латте", "Latte", "Латте", 180, "images/hot/latte.png"],
+      [1, "Американо", "Americano", "Американо", 150, "images/hot/americano.png"],
+      [1, "Капучино", "Cappuccino", "Капучино", 180, "images/hot/cappuccino.png"],
+      [1, "Латте", "Latte", "Латте", 180, "images/hot/latte.png"],
 
       // Закуски (cat: 4)
       [4, "Сендвич", "Sandwich", "Сэндвич", 230, "images/snacks/sandwich.png"],
@@ -51,7 +51,7 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
 
     initialItems.forEach(item => {
       db.run(
-        `INSERT INTO items (category_id, name_ru, name_en, name_kg, price, image_url)
+        `INSERT INTO items ( category_id, name_ru, name_en, name_kg, price, image_url)
          VALUES (?, ?, ?, ?, ?, ?)`,
         item
       );
@@ -64,7 +64,7 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
 
 // Получить все категории
 app.get('/categories', (req, res) => {
-  db.all("SELECT * FROM categories", (err, rows) => {
+  db.all("SELECT * FROM categories WHERE is_hidden = 0", (err, rows) => {
     if (err) return res.status(500).json({ error: err });
     res.json(rows);
   });
@@ -73,7 +73,7 @@ app.get('/categories', (req, res) => {
 // Получить позиции категории
 app.get('/categories/:id/items', (req, res) => {
   db.all(
-    "SELECT * FROM items WHERE category_id = ?",
+    "SELECT * FROM items WHERE category_id = ? AND is_hidden = 0",
     [req.params.id],
     (err, rows) => {
       if (err) return res.status(500).json({ error: err });
@@ -130,4 +130,44 @@ app.delete('/items/:id', (req, res) => {
 
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
+});
+
+app.patch('/categories/:id/toggle', (req, res) => {
+  db.run(
+    "UPDATE categories SET is_hidden = NOT is_hidden WHERE id = ?",
+    [req.params.id],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ updated: this.changes });
+    }
+  );
+});
+
+app.patch('/items/:id/toggle', (req, res) => {
+  db.run(
+    "UPDATE items SET is_hidden = NOT is_hidden WHERE id = ?",
+    [req.params.id],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ updated: this.changes });
+    }
+  );
+});
+
+app.get('/admin/categories', (req, res) => {
+  db.all("SELECT * FROM categories", (err, rows) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(rows);
+  });
+});
+
+app.get('/admin/categories/:id/items', (req, res) => {
+  db.all(
+    "SELECT * FROM items WHERE category_id = ?",
+    [req.params.id],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: err });
+      res.json(rows);
+    }
+  );
 });
