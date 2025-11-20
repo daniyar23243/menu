@@ -1,0 +1,47 @@
+body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .admin-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px;
+      background: #fff;
+      border-radius: 8px;
+      margin: 5px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .admin-item button {
+      width: auto;
+      background: #e63946;
+    }
+    .tglb{
+      background: darkgray !important;
+    }
+    .tglb1{
+      background: #4CAF50 !important;
+    }
