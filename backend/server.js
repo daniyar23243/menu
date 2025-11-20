@@ -32,21 +32,21 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
     
     const initialItems = [
       // Холодные напитки (cat: 1)
-      [2, "Фраппе", "Frappe", "Фраппе", 200, "images/cold/frappe.png"],
-      [2, "Мохито", "Mojito", "Мохито", 220, "images/cold/mojito.png"],
+      [2, "Фраппе", "Frappe", "Фраппе", 200, "images/frappe.png"],
+      [2, "Мохито", "Mojito", "Мохито", 220, "images/mohito.png"],
 
       // Десерты (cat: 2)
-      [3, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/desserts/cheesecake.png"],
-      [3, "Эклер", "Eclair", "Эклер", 180, "images/desserts/eclair.png"],
+      [3, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/cheesecake.png"],
+      [3, "Эклер", "Eclair", "Эклер", 180, "images/eclair.png"],
 
       // Горячие напитки (cat: 3)
-      [1, "Американо", "Americano", "Американо", 150, "images/hot/americano.png"],
-      [1, "Капучино", "Cappuccino", "Капучино", 180, "images/hot/cappuccino.png"],
-      [1, "Латте", "Latte", "Латте", 180, "images/hot/latte.png"],
+      [1, "Американо", "Americano", "Американо", 150, "images/americano.png"],
+      [1, "Капучино", "Cappuccino", "Капучино", 180, "images/capuccino.png"],
+      [1, "Латте", "Latte", "Латте", 180, "images/latte.png"],
 
       // Закуски (cat: 4)
-      [4, "Сендвич", "Sandwich", "Сэндвич", 230, "images/snacks/sandwich.png"],
-      [4, "Тост", "Toast", "Тост", 160, "images/snacks/toast.png"]
+      [4, "Сендвич", "Sandwich", "Сэндвич", 230, "images/sandwich.png"],
+      [4, "Тост", "Toast", "Тост", 160, "images/toast.png"]
     ];
 
     initialItems.forEach(item => {
