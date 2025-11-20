@@ -1,9 +1,8 @@
-// ===== ЗАГРУЗИТЬ СПИСОК КАТЕГОРИЙ =====
 function loadCategories() {
   fetch("http://localhost:3000/admin/categories")
     .then(res => res.json())
     .then(data => {
-      // Обновляем выпадающий список категорий
+      
       const select = document.getElementById("categorySelect");
       select.innerHTML = "";
       data.forEach(cat => {
@@ -13,7 +12,6 @@ function loadCategories() {
         select.appendChild(option);
       });
 
-      // Обновляем список категорий с кнопкой удалить
       const list = document.getElementById("categoryList");
       list.innerHTML = "<h2>Категории</h2>";
 
@@ -32,7 +30,6 @@ function loadCategories() {
     });
 }
 
-// ===== ДОБАВИТЬ КАТЕГОРИЮ =====
 function addCategory() {
   const body = {
     name_ru: cat_ru.value,
@@ -51,7 +48,6 @@ function addCategory() {
   });
 }
 
-// ===== УДАЛИТЬ КАТЕГОРИЮ =====
 function deleteCategory(id) {
   if (!confirm("Удалить категорию?")) return;
 
@@ -60,11 +56,11 @@ function deleteCategory(id) {
   }).then(() => {
     alert("Категория удалена");
     loadCategories();
-    loadItems(); // обновить список товаров
+    loadItems(); 
   });
 }
 
-// ===== ЗАГРУЗИТЬ СПИСОК ТОВАРОВ =====
+
 function loadItems() {
   fetch("http://localhost:3000/admin/categories")
     .then(res => res.json())
@@ -96,7 +92,6 @@ function loadItems() {
     });
 }
 
-// ===== ДОБАВИТЬ ТОВАР =====
 function addItem() {
   const body = {
     category_id: categorySelect.value,
@@ -117,7 +112,7 @@ function addItem() {
   });
 }
 
-// ===== УДАЛИТЬ ТОВАР =====
+
 function deleteItem(id) {
   if (!confirm("Удалить товар?")) return;
 
@@ -129,7 +124,6 @@ function deleteItem(id) {
   });
 }
 
-// ===== ПЕРЕКЛЮЧИТЬ ВИДИМОСТЬ КАТЕГОРИИ =====
 function toggleCategory(id) {
   fetch(`http://localhost:3000/categories/${id}/toggle`, {
     method: "PATCH"
@@ -138,7 +132,6 @@ function toggleCategory(id) {
     loadItems();
   });
 }
-// ===== ПЕРЕКЛЮЧИТЬ ВИДИМОСТЬ ТОВАРА =====
 function toggleItem(id) {
   fetch(`http://localhost:3000/items/${id}/toggle`, {
     method: "PATCH"
@@ -146,6 +139,6 @@ function toggleItem(id) {
     loadItems();
   });
 }
-// ========= ПЕРВАЯ ЗАГРУЗКА ==========
+
 loadCategories();
 loadItems();

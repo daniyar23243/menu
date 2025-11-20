@@ -8,7 +8,7 @@ body {
       align-items: center;
     }
 
-    /* ===== HEADER ===== */
+    
 
     .header {
       width: 100%;
@@ -44,7 +44,7 @@ body {
       margin: 0 auto;
     }
 
-    /* ===== LANGUAGE MENU ===== */
+    
 
     .lang-wrapper {
       position: relative;
@@ -97,7 +97,7 @@ body {
       width: 45px;
     }
 
-    /* ===== ITEMS ===== */
+    
 
     .items-container {
       width: 90%;
@@ -116,7 +116,7 @@ body {
       padding: 12px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-      /* ❗ hover УБРАН */
+      
     }
 
     .item-card img {
@@ -145,7 +145,7 @@ body {
       color: #444;
     }
 
-    /* ===== MOBILE ===== */
+    
 
     @media (max-width: 600px) {
       .header {

@@ -1,18 +1,18 @@
-// ===== ПЕРЕВОДЫ =====
+
   const translations = {
     ru: { menu: "Меню", currency: "сом", language: "Язык" },
     en: { menu: "Menu", currency: "som", language: "Language" },
     kg: { menu: "Меню", currency: "сом", language: "Тил" }
   };
 
-  // ===== UPDATE UI =====
+  
   function updateUI() {
     const lang = localStorage.getItem("language") || "ru";
     document.getElementById("menuTitle").textContent = translations[lang].menu;
     document.querySelector(".lang-btn").textContent = `🌐 ${translations[lang].language}`;
   }
 
-  // ===== LANGUAGE DROPDOWN =====
+  
   function toggleLanguageMenu() {
     document.getElementById("langMenu").classList.toggle("show");
   }
@@ -24,7 +24,7 @@
     loadItems();
   }
 
-  // ===== LOAD ITEMS =====
+  
   function loadItems() {
     const categoryId = localStorage.getItem("category_id");
     const lang = localStorage.getItem("language") || "ru";
@@ -57,11 +57,11 @@
       });
   }
 
-  // ===== BACK =====
+  
   function goBack() {
     window.location.href = "categories.html";
   }
 
-  // ===== INIT =====
+  
   updateUI();
   loadItems();

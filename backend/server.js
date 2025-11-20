@@ -6,7 +6,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Авто-добавление категорий при пустой таблице
 db.get("SELECT COUNT(*) AS count FROM categories", (err, result) => {
   if (!err && result.count === 0) {
     const initialCategories = [
@@ -26,25 +25,20 @@ db.get("SELECT COUNT(*) AS count FROM categories", (err, result) => {
     console.log("Начальные категории добавлены!");
   }
 });
-// ===== ДОБАВЛЕНИЕ ПОЗИЦИЙ ПРИ ПЕРВОМ ЗАПУСКЕ =====
 db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
   if (!err && result.count === 0) {
     
     const initialItems = [
-      // Холодные напитки (cat: 1)
       [2, "Фраппе", "Frappe", "Фраппе", 200, "images/frappe.png"],
       [2, "Мохито", "Mojito", "Мохито", 220, "images/mohito.png"],
 
-      // Десерты (cat: 2)
       [3, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/cheesecake.png"],
       [3, "Эклер", "Eclair", "Эклер", 180, "images/eclair.png"],
 
-      // Горячие напитки (cat: 3)
       [1, "Американо", "Americano", "Американо", 150, "images/americano.png"],
       [1, "Капучино", "Cappuccino", "Капучино", 180, "images/capuccino.png"],
       [1, "Латте", "Latte", "Латте", 180, "images/latte.png"],
 
-      // Закуски (cat: 4)
       [4, "Сендвич", "Sandwich", "Сэндвич", 230, "images/sandwich.png"],
       [4, "Тост", "Toast", "Тост", 160, "images/toast.png"]
     ];
@@ -62,7 +56,6 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
 });
 
 
-// Получить все категории
 app.get('/categories', (req, res) => {
   db.all("SELECT * FROM categories WHERE is_hidden = 0", (err, rows) => {
     if (err) return res.status(500).json({ error: err });
@@ -70,7 +63,7 @@ app.get('/categories', (req, res) => {
   });
 });
 
-// Получить позиции категории
+
 app.get('/categories/:id/items', (req, res) => {
   db.all(
     "SELECT * FROM items WHERE category_id = ? AND is_hidden = 0",
@@ -82,7 +75,7 @@ app.get('/categories/:id/items', (req, res) => {
   );
 });
 
-// Добавить категорию
+
 app.post('/categories', (req, res) => {
   const { name_ru, name_en, name_kg, image_url } = req.body;
 
@@ -96,7 +89,7 @@ app.post('/categories', (req, res) => {
   );
 });
 
-// Добавить позицию
+
 app.post('/items', (req, res) => {
   const { category_id, name_ru, name_en, name_kg, price, image_url } = req.body;
 
@@ -112,7 +105,6 @@ app.post('/items', (req, res) => {
   );
 });
 
-// Удалить категорию
 app.delete('/categories/:id', (req, res) => {
   db.run("DELETE FROM categories WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });
@@ -120,7 +112,7 @@ app.delete('/categories/:id', (req, res) => {
   });
 });
 
-// Удалить позицию
+
 app.delete('/items/:id', (req, res) => {
   db.run("DELETE FROM items WHERE id = ?", [req.params.id], function (err) {
     if (err) return res.status(500).json({ error: err.message });

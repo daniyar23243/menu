@@ -17,12 +17,12 @@ document.getElementById("usernameText").textContent =
 
     function setLanguage(lang) {
   localStorage.setItem("language", lang);
-  toggleLanguageMenu(); // закрыть меню
-  updateUI(); // обновить текст на странице
-  loadCategories(); // обновить категории на выбранном языке
+  toggleLanguageMenu(); 
+  updateUI(); 
+  loadCategories(); 
     }
 
-    // Загружаем категории из бэкенда
+    
 function loadCategories() {
   fetch("http://localhost:3000/categories")
     .then(res => res.json())
@@ -75,16 +75,16 @@ function loadCategories() {
   function updateUI() {
   const lang = localStorage.getItem("language") || "ru";
 
-  // Приветствие
+  
   const username = localStorage.getItem("username") || "";
   document.getElementById("usernameText").textContent =
     `${translations[lang].greeting}, ${username}!`;
 
-  // Заголовок
+  
   document.querySelector(".title").textContent =
     translations[lang].chooseCategory;
 
-  // Кнопка выбора языка
+  
   document.querySelector(".lang-btn").textContent =
     `🌐 ${translations[lang].language}`;
 }
