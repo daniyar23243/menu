@@ -2,18 +2,32 @@ function continueToCategories() {
   const name = document.getElementById("username").value.trim();
   if (name.length === 0) return;
 
-  
-  const ADMIN_CODE = "admin123";  
+  const ADMIN_CODE = "admin123";
 
   if (name === ADMIN_CODE) {
-    window.location.href = "admin.html";
+    fetch("http://localhost:3000/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: name })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          localStorage.setItem("admin_token", data.token);
+
+          window.location.href = "admin.html";
+        } else {
+          alert("Неверный админ-код");
+        }
+      });
+
     return;
   }
 
-  
   localStorage.setItem("username", name);
   window.location.href = "categories.html";
 }
+
 
 
   

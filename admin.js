@@ -1,3 +1,9 @@
+  const token = localStorage.getItem("admin_token");
+
+  if (!token) {
+    window.location.href = "index.html";
+  }
+
 function loadCategories() {
   fetch("http://localhost:3000/admin/categories")
     .then(res => res.json())

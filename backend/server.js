@@ -163,3 +163,30 @@ app.get('/admin/categories/:id/items', (req, res) => {
     }
   );
 });
+
+app.use(express.json());
+
+const ADMIN_CODE = "admin123";
+const ADMIN_TOKEN = "SUPER_SECRET_ADMIN_TOKEN";
+
+app.post("/admin/login", (req, res) => {
+  const { code } = req.body;
+
+  if (code === ADMIN_CODE) {
+    return res.json({ ok: true, token: ADMIN_TOKEN });
+  }
+
+  return res.status(401).json({ ok: false, error: "Wrong admin code" });
+});
+
+const path = require("path");
+
+app.get("/admin.html", (req, res) => {
+  const token = req.headers["x-admin-token"];
+
+  if (token !== ADMIN_TOKEN) {
+    return res.status(403).send("Access Denied");
+  }
+
+  res.sendFile(path.join(__dirname, "admin.html"));
+});
