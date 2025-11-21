@@ -99,14 +99,22 @@ function loadItems() {
 }
 
 function addItem() {
+  const desc_ru = document.getElementById("desc_ru");
+  const desc_en = document.getElementById("desc_en");
+  const desc_kg = document.getElementById("desc_kg");
+  console.log(desc_ru.value, desc_en.value, desc_kg);
   const body = {
     category_id: categorySelect.value,
     name_ru: item_ru.value,
     name_en: item_en.value,
     name_kg: item_kg.value,
+    description_ru: desc_ru.value,
+    description_en: desc_en.value,
+    description_kg: desc_kg.value,
     price: item_price.value,
     image_url: item_img.value
   };
+  
 
   fetch("http://localhost:3000/items", {
     method: "POST",

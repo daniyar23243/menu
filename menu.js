@@ -49,6 +49,7 @@
             <div class="item-info">
               <p class="item-name">${item[nameField]}</p>
               <p class="item-price">${item.price} ${translations[lang].currency}</p>
+              <p class="item-description">${item["description_" + lang] || ""}</p>
             </div>
           `;
 

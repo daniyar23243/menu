@@ -29,24 +29,24 @@ db.get("SELECT COUNT(*) AS count FROM items", (err, result) => {
   if (!err && result.count === 0) {
     
     const initialItems = [
-      [2, "Фраппе", "Frappe", "Фраппе", 200, "images/frappe.png"],
-      [2, "Мохито", "Mojito", "Мохито", 220, "images/mohito.png"],
+      [2, "Фраппе", "Frappe", "Фраппе", 200, "images/frappe.png", 0, "description ru", "descrr eng", ""],
+      [2, "Мохито", "Mojito", "Мохито", 220, "images/mohito.png", 0, "", "", ""],
 
-      [3, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/cheesecake.png"],
-      [3, "Эклер", "Eclair", "Эклер", 180, "images/eclair.png"],
+      [3, "Чизкейк", "Cheesecake", "Чизкейк", 250, "images/cheesecake.png", 0, "", "", ""],
+      [3, "Эклер", "Eclair", "Эклер", 180, "images/eclair.png", 0, "", "", ""],
 
-      [1, "Американо", "Americano", "Американо", 150, "images/americano.png"],
-      [1, "Капучино", "Cappuccino", "Капучино", 180, "images/capuccino.png"],
-      [1, "Латте", "Latte", "Латте", 180, "images/latte.png"],
+      [1, "Американо", "Americano", "Американо", 150, "images/americano.png", 0, "", "", ""],
+      [1, "Капучино", "Cappuccino", "Капучино", 180, "images/capuccino.png", 0, "", "", ""],
+      [1, "Латте", "Latte", "Латте", 180, "images/latte.png", 0, "", "", ""],
 
-      [4, "Сендвич", "Sandwich", "Сэндвич", 230, "images/sandwich.png"],
-      [4, "Тост", "Toast", "Тост", 160, "images/toast.png"]
+      [4, "Сендвич", "Sandwich", "Сэндвич", 230, "images/sandwich.png", 0, "", "", ""],
+      [4, "Тост", "Toast", "Тост", 160, "images/toast.png", 0, "", "", ""]
     ];
 
     initialItems.forEach(item => {
       db.run(
-        `INSERT INTO items ( category_id, name_ru, name_en, name_kg, price, image_url)
-         VALUES (?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO items ( category_id, name_ru, name_en, name_kg, price, image_url, is_hidden, description_ru, description_en, description_kg)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         item
       );
     });
@@ -91,13 +91,13 @@ app.post('/categories', (req, res) => {
 
 
 app.post('/items', (req, res) => {
-  const { category_id, name_ru, name_en, name_kg, price, image_url } = req.body;
+  const { category_id, name_ru, name_en, name_kg, price, image_url, description_ru, description_en, description_kg} = req.body;
 
   db.run(
     `INSERT INTO items 
-     (category_id, name_ru, name_en, name_kg, price, image_url) 
-     VALUES (?, ?, ?, ?, ?, ?)`,
-    [category_id, name_ru, name_en, name_kg, price, image_url],
+     (category_id, name_ru, name_en, name_kg, price, image_url, description_ru, description_en, description_kg) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [category_id, name_ru, name_en, name_kg, price, image_url, description_ru, description_en, description_kg],
     function (err) {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ id: this.lastID });

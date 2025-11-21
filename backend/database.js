@@ -23,6 +23,9 @@ db.serialize(() => {
       price REAL,
       image_url TEXT,
       is_hidden INTEGER DEFAULT 0,
+      description_ru TEXT,
+      description_en TEXT,
+      description_kg TEXT,
       FOREIGN KEY (category_id) REFERENCES categories(id)
     )
   `);
