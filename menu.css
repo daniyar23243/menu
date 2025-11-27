@@ -100,10 +100,13 @@ body::before {
   width: 40px;
   transition: 0.2s ease;
 }
-
-.lang-menu img:hover {
-  transform: scale(1.15);
+button{
+  border: none;
+  background: white;
+  border-radius: 7px;
+  cursor: pointer;
 }
+
 
 .items-container {
   width: 92%;
