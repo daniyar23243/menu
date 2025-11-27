@@ -1,178 +1,184 @@
 body {
-      margin: 0;
-      padding: 0;
-      background: #f3f3f3;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #222;
+  background: linear-gradient(135deg, #eef3ff, #f8f9fc);
+  background-attachment: fixed;
+}
 
-    
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.3;
+}
 
-    .header {
-      width: 100%;
-      max-width: 900px;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: white;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      border-radius: 0 0 15px 15px;
-      margin-bottom: 20px;
-      position: relative;
-    }
+.header {
+  width: 100%;
+  max-width: 900px;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff; /* Чистый белый */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border-radius: 0 0 22px 22px;
+  margin-bottom: 25px;
+  border-bottom: 3px solid #4A90E2;
+}
 
-    .back-btn {
-      padding: 8px 14px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #e6e6e6;
-      transition: 0.2s;
-    }
+.back-btn,
+.lang-btn {
+  padding: 9px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #e7eef6;
+  color: #2f5e99;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
 
-    .back-btn:hover {
-      background: #d2d2d2;
-    }
+.back-btn:hover,
+.lang-btn:hover {
+  background: #d9e7fa;
+}
 
-    .title {
-      font-size: 22px;
-      font-weight: 700;
-      margin: 0 auto;
-    }
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 auto;
+  text-align: center;
+  color: #1f1f1f;
+  letter-spacing: 0.4px;
+  position: relative;
+}
 
-    
+.title::after {
+  content: "";
+  display: block;
+  width: 55px;
+  height: 4px;
+  background: #4A90E2;
+  margin: 6px auto 0;
+  border-radius: 2px;
+}
 
-    .lang-wrapper {
-      position: relative;
-    }
 
-    .lang-btn {
-      padding: 8px 14px;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #e6e6e6;
-      transition: 0.2s;
-    }
+.lang-wrapper {
+  position: relative;
+}
 
-    .lang-btn:hover {
-      background: #d2d2d2;
-    }
+.lang-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #ffffff; 
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+  border: 1px solid #d5dbe6;
+}
 
-    .lang-menu {
-      position: absolute;
-      top: 45px;
-      right: 0;
-      background: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      border-radius: 10px;
-      padding: 10px;
-      display: none;
-      flex-direction: column;
-      gap: 10px;
-      z-index: 10;
-    }
+.lang-menu.show {
+  display: flex;
+}
 
-    .lang-menu.show {
-      display: flex;
-    }
+.lang-menu img {
+  width: 40px;
+  transition: 0.2s ease;
+}
 
-    .lang-menu button {
-      border: none;
-      background: none;
-      cursor: pointer;
-    }
+.lang-menu img:hover {
+  transform: scale(1.15);
+}
 
-    .lang-menu img {
-      width: 40px;
-      transition: 0.2s;
-    }
+.items-container {
+  width: 92%;
+  max-width: 750px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  padding-bottom: 40px;
+}
 
-    .lang-menu img:hover {
-      width: 45px;
-    }
+.item-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+  border: 1px solid #e3e6ef;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
 
-    
+.item-card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.14);
+  border-color: #4A90E2;
+  background: #f8faff;
+}
 
-    .items-container {
-      width: 90%;
-      max-width: 750px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      padding-bottom: 30px;
-    }
+.item-card img {
+  width: 95px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
 
-    .item-card {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      background: white;
-      padding: 12px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-      
-    }
+.item-card:hover img {
+  transform: scale(1.03);
+}
 
-    .item-card img {
-      width: 90px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
+.item-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
-    .item-info {
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
+.item-name {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #2a3d59;
+}
 
-    .item-name {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 0;
-    }
+.item-price {
+  margin-top: 6px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #4A90E2;
+}
 
-    .item-price {
-      margin-top: 5px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #444;
-    }
 
-    
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 12px;
+  }
 
-    @media (max-width: 600px) {
-      .header {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-      }
+  .item-card img {
+    width: 80px;
+    height: 80px;
+  }
 
-      .title {
-        font-size: 20px;
-      }
+  .item-name {
+    font-size: 18px;
+  }
+}
 
-      .item-card {
-        gap: 12px;
-        padding: 10px;
-      }
-
-      .item-card img {
-        width: 75px;
-        height: 75px;
-      }
-
-      .item-name {
-        font-size: 18px;
-      }
-
-      .item-price {
-        font-size: 16px;
-      }
-    }
